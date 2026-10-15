@@ -1,0 +1,27 @@
+services:
+  gateway:
+    build: ./gateway
+    ports: ["8080:80"]
+    depends_on: [frontend, results-service]
+
+  frontend:
+    build: ./frontend
+
+  results-service:
+    build: ./services/results-service
+    environment: 
+      PREDICTIONS_SERVICE_URL: https://prediction-service:8001
+      LOG_LEVEL: info
+    depends_on:
+      prediction-service:
+      condtion: service_healthy
+     
+  prediction-service:
+    build: ./services/prediction-service
+    environment:
+      MODEL_PATH: /app/models/model_v1.joblib
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8001/health')"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
