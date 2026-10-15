@@ -1,0 +1,60 @@
+version: 2
+
+updates:
+  # The actions used in .github/workflows
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+
+  # Python services
+  - package-ecosystem: pip
+    directory: /services/prediction-service
+    schedule:
+      interval: weekly
+    ignore:
+      # The saved model file is tied to the scikit-learn version it was trained
+      
+      - dependency-name: scikit-learn
+        update-types: ["version-update:semver-major", "version-update:semver-minor"]
+
+  - package-ecosystem: pip
+    directory: /services/results-service
+    schedule:
+      interval: weekly
+
+  # Training environment (same scikit-learn rule as the prediction service)
+  - package-ecosystem: pip
+    directory: /ml
+    schedule:
+      interval: weekly
+    ignore:
+      - dependency-name: scikit-learn
+        update-types: ["version-update:semver-major", "version-update:semver-minor"]
+
+  # Frontend (only useful if the frontend uses npm)
+  - package-ecosystem: npm
+    directory: /frontend
+    schedule:
+      interval: weekly
+
+  # Base images in each Dockerfile
+  - package-ecosystem: docker
+    directory: /gateway
+    schedule:
+      interval: weekly
+
+  - package-ecosystem: docker
+    directory: /frontend
+    schedule:
+      interval: weekly
+
+  - package-ecosystem: docker
+    directory: /services/prediction-service
+    schedule:
+      interval: weekly
+
+  - package-ecosystem: docker
+    directory: /services/results-service
+    schedule:
+      interval: weekly
