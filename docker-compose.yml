@@ -9,17 +9,20 @@ services:
 
   results-service:
     build: ./services/results-service
-    environment: 
-      PREDICTIONS_SERVICE_URL: https://prediction-service:8001
+    environment:
+      PREDICTION_SERVICE_URL: http://prediction-service:8001
       LOG_LEVEL: info
     depends_on:
       prediction-service:
-      condtion: service_healthy
-     
+        condition: service_healthy
+
   prediction-service:
-    build: ./services/prediction-service
+    build:
+      context: .
+      dockerfile: services/prediction-service/Dockerfile
     environment:
       MODEL_PATH: /app/models/model_v1.joblib
+      USE_MOCK_MODEL: "true"
     healthcheck:
       test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8001/health')"]
       interval: 10s

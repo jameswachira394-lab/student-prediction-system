@@ -1,0 +1,94 @@
+/**
+ * Base styles and typography (frontendesign.md Section 4 & 5)
+ *
+ * TYPOGRAPHY SCALE (Section 4):
+ * - Page title:    Manrope 800, 44px / 48px line-height (30px / 34px on phones)
+ * - Result number: Manrope 800, 80px / 80px (64px on phones)
+ * - Card heading:  Manrope 700, 22px / 28px (20px on phones)
+ * - Intro text:    Inter 400, 18px / 27px
+ * - Body text:     Inter 400, 16px / 24px
+ * - Field label:   Inter 600, 16px / 24px
+ * - Hint text:     Inter 400, 14px / 20px
+ * - Tag text:      Inter 600, 12px / 16px
+ * - Eyebrow:       Inter 600, 14px, uppercase, 0.06em letter-spacing
+ *
+ * SPACING SCALE (Section 5):
+ * - Use only: 4px, 8px, 12px, 16px, 24px, 32px, 48px
+ *
+ * LAYOUT:
+ * - Content max-width 1184px, centered, 24px side padding (16px on phones < 480px)
+ * - Main breakpoint: 1080px (above: 2 columns; below: 1 column)
+ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  color: var(--ink);
+  background-color: var(--ground);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Page container (max 1184px wide, centered) */
+.page-wrap {
+  width: 100%;
+  max-width: 1184px;
+  margin: 0 auto;
+  padding: 32px 24px 48px;
+}
+
+/* Accessible focus ring (frontendesign.md Section 5 & 11) */
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+/* Heading & Typography Classes - Developer to implement styles */
+.page-title {
+  font-family: 'Manrope', system-ui, sans-serif;
+  font-weight: 800;
+  font-size: 44px;
+  line-height: 48px;
+  color: var(--ink);
+}
+
+.card-heading {
+  font-family: 'Manrope', system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 28px;
+}
+
+.eyebrow {
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+
+.intro-text {
+  font-size: 18px;
+  line-height: 27px;
+  color: var(--ink-soft);
+  max-width: 680px;
+}
+
+/* Mobile responsive typography adjustments (< 480px) */
+@media (max-width: 480px) {
+  .page-wrap {
+    padding: 24px 16px 32px;
+  }
+  .page-title {
+    font-size: 30px;
+    line-height: 34px;
+  }
+  .card-heading {
+    font-size: 20px;
+  }
+}

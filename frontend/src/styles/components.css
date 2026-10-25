@@ -1,0 +1,93 @@
+/**
+ * Component Styles (frontendesign.md Section 7, 8, 9)
+ *
+ * NOTE FOR FRONTEND DEVELOPER:
+ * Build your component CSS below. Key guidelines from the design doc:
+ *
+ * 1. HEADER (Section 7.1)
+ *    - White background, 1px bottom border (--border)
+ *    - Logo: 36px rounded square in --primary with white rising line
+ *    - Nav: pills (10px 18px padding). Active link has --primary-soft bg, --primary-dark text, weight 600
+ *    - Mobile: 44px square menu button
+ *
+ * 2. CARDS & LAYOUT (Section 5 & 6)
+ *    - Card surface: white, 1px --border, 16px radius, 32px padding (20px on phones)
+ *    - Card gap: 32px (16px on phones)
+ *    - Desktop (>= 1080px): Row 1 has two columns (Form ~560px, Result ~440px). Row 2 has two equal columns.
+ *    - Mobile (< 1080px): 1 column stack (Form -> Result -> Influence -> Tips).
+ *
+ * 3. SLIDERFIELD (Section 7.2)
+ *    - Label row: <label> left, number input (72px wide, 44px tall, weight 600) + unit text right
+ *    - Slider: full width, 44px tall touch target, accent-color: var(--primary)
+ *    - Range ticks: desktop only, 13px, --muted
+ *    - Hint text: 14px, --muted
+ *    - Error state: 2px --support-text border, --error-field-bg background, error message below with alert icon
+ *
+ * 4. PRIMARY BUTTON (Section 7.3)
+ *    - Min height: 52px, 12px radius, --primary background, white text (17px, weight 600)
+ *    - Right arrow icon
+ *    - Hover/pressed: --primary-dark
+ *    - Disabled: --disabled-bg
+ *
+ * 5. RESULT CARD & CHIPS (Section 7.5, 7.6, 7.7)
+ *    - Big score number: 80px font-size, Manrope 800
+ *    - GradeChip: 68px square, --primary-soft background, "Grade" caption above letter
+ *    - RiskBadge pill: 8px 16px 8px 12px padding, 15px weight 600, 18px icon
+ *      * low: --ontrack-*
+ *      * medium: --attention-*
+ *      * high: --support-*
+ *    - ScoreGauge: 14px tall pill bar split into 3 zones (--zone-support, --zone-attention, --zone-ontrack).
+ *      Marker: 24px circle, white fill, 4px --ink ring.
+ *      Legend below with colored square, zone name, and range.
+ *
+ * 6. INFLUENCE CARD (Section 7.8)
+ *    - Row layout: label (112px wide), 14px track in --track with --primary fill width %, percent right.
+ *
+ * 7. TIPS CARD (Section 7.9)
+ *    - 3 tips: 40px circle in --primary-soft with --primary-dark icon, bold title 16px, body 15px --ink-soft.
+ *
+ * 8. SCREEN STATES (Section 9)
+ *    - Empty: 64px icon circle, "Your estimate will appear here"
+ *    - Loading: Spinner, placeholder skeleton blocks with --track
+ *    - Server error: 64px circle in --support-bg with warning icon, "We could not get your estimate", "Try again" button
+ */
+
+/* Layout Grid */
+.card-row {
+  display: grid;
+  gap: 32px;
+  margin-top: 32px;
+}
+
+@media (min-width: 1080px) {
+  .row-primary {
+    grid-template-columns: 1fr 440px;
+  }
+  .row-secondary {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 1079px) {
+  .card-row {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-top: 16px;
+  }
+}
+
+/* Card Container */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  padding: 32px;
+}
+
+@media (max-width: 480px) {
+  .card {
+    padding: 20px;
+  }
+}
+
+/* Developer: Add your component styling below */

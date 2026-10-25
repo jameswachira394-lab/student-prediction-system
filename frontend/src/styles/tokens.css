@@ -1,0 +1,56 @@
+/**
+ * Design Tokens (frontendesign.md Section 3)
+ * NOTE FOR FRONTEND DEVELOPER:
+ * Put these in one file and use them everywhere.
+ * Never type a hex value in a component.
+ */
+:root {
+  /* Text */
+  --ink: #10243E;            /* text and headings */
+  --ink-soft: #31445B;       /* secondary text */
+  --muted: #55657A;          /* hints and small labels */
+
+  /* Surfaces and lines */
+  --ground: #F4F7FA;         /* page background */
+  --surface: #FFFFFF;        /* cards and inputs */
+  --border: #DDE5EE;         /* card edges and dividers */
+  --border-strong: #8A9AAE;  /* input outlines */
+  --track: #E6ECF3;          /* empty part of a bar, loading skeleton */
+  --tag-bg: #EEF2F7;         /* "Sample data" tag */
+
+  /* Brand */
+  --primary: #0B6E78;        /* buttons, bars, sliders */
+  --primary-dark: #09595F;   /* hover, pressed, text on the soft tint */
+  --primary-soft: #E3F3F5;   /* active nav, icon circles, grade chip */
+  --focus: #6DB8C0;          /* keyboard focus ring */
+
+  /* Risk: on track (low) */
+  --ontrack-bg: #E6F0FF;
+  --ontrack-text: #1A4FA3;
+  --ontrack-line: #B9D3FA;
+
+  /* Risk: needs attention (medium) */
+  --attention-bg: #FFF1D6;
+  --attention-text: #8A4B00;
+  --attention-line: #F0D08A;
+
+  /* Risk: ask for support (high) and errors */
+  --support-bg: #FDE8E1;
+  --support-text: #A3361B;
+  --support-line: #F2C2B2;
+  --error-field-bg: #FFF8F6;
+
+  /* Score gauge zones */
+  --zone-support: #F4C6B8;
+  --zone-attention: #F7DB9B;
+  --zone-ontrack: #B7D1F5;
+
+  /* Disabled button */
+  --disabled-bg: #C9D4DF;
+
+  /* Shape */
+  --radius-input: 10px;
+  --radius-button: 12px;
+  --radius-card: 16px;
+  --radius-pill: 999px;
+}

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Results Predictor</title>
+
+  <!-- Typography: Manrope (headings/numbers) & Inter (body/labels) per frontendesign.md section 4 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@700;800&display=swap">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="styles/tokens.css">
+  <link rel="stylesheet" href="styles/base.css">
+  <link rel="stylesheet" href="styles/components.css">
+</head>
+<body>
+
+  <!--
+    PAGE HEADER (frontendesign.md Section 7.1)
+    - Logo mark (36px rounded square with rising line)
+    - App title: "Results Predictor"
+    - Navigation: Predict (active), How it works, About the model
+    - Mobile menu button (44px touch target)
+  -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand">
+        <!-- Developer: Insert logo SVG and title here -->
+        <span class="brand-title">Results Predictor</span>
+      </div>
+      <nav class="nav" aria-label="Main navigation">
+        <!-- Developer: Nav links as pill buttons; active gets aria-current="page" -->
+      </nav>
+      <button class="menu-btn" aria-label="Open menu" aria-expanded="false">
+        <!-- Developer: Mobile hamburger icon -->
+      </button>
+    </div>
+  </header>
+
+  <main class="page-wrap">
+    <!--
+      INTRO SECTION (frontendesign.md Section 6 & 10)
+      - Eyebrow: "YOUR RESULTS ESTIMATE"
+      - Title: "See where your results are heading"
+      - Intro paragraph: supportive tone
+    -->
+    <section class="intro-section">
+      <p class="eyebrow">Your results estimate</p>
+      <h1 class="page-title">See where your results are heading</h1>
+      <p class="intro-text">
+        Tell us a little about how you study. We will estimate your result and suggest small changes that could help.
+      </p>
+    </section>
+
+    <!--
+      ROW 1: Form & Result (frontendesign.md Section 6 & 8)
+      - Desktop (>= 1080px): 2 columns (Form ~560px, Result ~440px)
+      - Mobile (< 1080px): Stacks into 1 column
+    -->
+    <div class="card-row row-primary">
+
+      <!-- Form Card (frontendesign.md Section 7.2 & 7.3) -->
+      <section class="card form-card" aria-labelledby="form-heading">
+        <h2 id="form-heading" class="card-heading">Your study habits</h2>
+        <p class="form-hint">Move a slider or type a number. All three are needed.</p>
+
+        <form id="prediction-form" novalidate>
+          <!-- Dynamic slider fields container (generated via js/form.js) -->
+          <div id="fields-container" class="fields-container">
+            <!--
+              Developer:
+              Render 3 SliderFields here dynamically from GET /api/model-info:
+              1. study_hours (0 to 80 hours)
+              2. attendance (0 to 100 %)
+              3. previous_score (0 to 100 %)
+            -->
+          </div>
+
+          <!-- Submit button (min 52px tall, primary teal, with right arrow icon) -->
+          <button type="submit" id="submit-btn" class="btn btn-primary">
+            <span>Predict my result</span>
+          </button>
+          <p class="sub-button-hint">Change any value and press the button again.</p>
+        </form>
+      </section>
+
+      <!-- Result Card (frontendesign.md Section 7.5, 7.6, 7.7, and Section 9 states) -->
+      <section class="card result-card" id="result-card" aria-live="polite">
+        <!--
+          Developer:
+          Render the 4 states here via js/render.js:
+          1. Empty state: Before first prediction
+          2. Loading state: Spinner + skeleton placeholders
+          3. Success state: Score (80px), GradeChip, RiskBadge, ScoreGauge (3 zones), Explanation, Footnote
+          4. Error state: Circle warning icon + message + "Try again" button
+        -->
+        <div id="result-content"></div>
+      </section>
+
+    </div>
+
+    <!--
+      ROW 2: Influence & Tips (frontendesign.md Section 7.8 & 7.9)
+    -->
+    <div class="card-row row-secondary">
+
+      <!-- Influence Card: 3 horizontal bars showing feature importance -->
+      <section class="card influence-card" id="influence-card">
+        <h2 class="card-heading">What moves your result most</h2>
+        <p class="card-subtext">A longer bar means that input has more influence on your estimate.</p>
+        <div id="influence-bars" class="influence-bars">
+          <!-- Developer: Render horizontal percentage bars (sorted highest to lowest) -->
+        </div>
+      </section>
+
+      <!-- Tips Card: 3 supportive suggestions -->
+      <section class="card tips-card" id="tips-card">
+        <h2 class="card-heading">Small changes to try</h2>
+        <div id="tips-list" class="tips-list">
+          <!-- Developer: Render tips with icon circles and supportive wording -->
+        </div>
+        <!-- Stretch feature: hidden until what-if is built -->
+        <button id="what-if-btn" class="btn btn-secondary" style="display: none;">
+          Explore what-if changes
+        </button>
+      </section>
+
+    </div>
+  </main>
+
+  <!--
+    PAGE FOOTER (frontendesign.md Section 7.10)
+    - Left: Disclaimer
+    - Right: Team credits
+  -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p class="disclaimer">
+        Predictions are estimates, not guarantees. They come from a limited dataset and may not fit every school or course.
+      </p>
+      <p class="team-credit">Student project by [TEAM NAME]</p>
+    </div>
+  </footer>
+
+  <!-- Scripts (loaded in dependency order) -->
+  <script src="js/config.js" defer></script>
+  <script src="js/api.js" defer></script>
+  <script src="js/form.js" defer></script>
+  <script src="js/render.js" defer></script>
+  <script src="js/main.js" defer></script>
+</body>
+</html>
