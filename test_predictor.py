@@ -1,12 +1,9 @@
-
-
 import unittest
 
 from predictor import predict_student
 
 
 class TestPredictor(unittest.TestCase):
-
     def setUp(self):
         self.student = {
             "Gender": "Female",
@@ -21,10 +18,7 @@ class TestPredictor(unittest.TestCase):
     def test_prediction_returns_valid_status(self):
         result = predict_student(self.student)
 
-        self.assertIn(
-            result["predicted_status"],
-            ["Pass", "Fail"]
-        )
+        self.assertIn(result["predicted_status"], ["Pass", "Fail"])
 
     def test_probabilities_are_valid(self):
         result = predict_student(self.student)
@@ -37,11 +31,7 @@ class TestPredictor(unittest.TestCase):
             self.assertGreaterEqual(probability, 0)
             self.assertLessEqual(probability, 1)
 
-        self.assertAlmostEqual(
-            sum(probabilities.values()),
-            1.0,
-            places=5
-        )
+        self.assertAlmostEqual(sum(probabilities.values()), 1.0, places=5)
 
     def test_missing_feature_is_rejected(self):
         incomplete_student = self.student.copy()

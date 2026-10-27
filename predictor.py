@@ -1,9 +1,7 @@
-
 from pathlib import Path
 
 import joblib
 import pandas as pd
-
 
 # Locate the saved model relative to this file
 PROJECT_DIR = Path(__file__).resolve().parent
@@ -24,9 +22,7 @@ FEATURE_COLUMNS = [
 def load_trained_model():
     """Load the saved machine-learning pipeline."""
     if not MODEL_PATH.exists():
-        raise FileNotFoundError(
-            f"Model file not found: {MODEL_PATH}"
-        )
+        raise FileNotFoundError(f"Model file not found: {MODEL_PATH}")
 
     return joblib.load(MODEL_PATH)
 
@@ -39,20 +35,15 @@ def predict_student(student_data, model=None):
     seven required input features.
     """
     missing_features = [
-        feature
-        for feature in FEATURE_COLUMNS
-        if feature not in student_data
+        feature for feature in FEATURE_COLUMNS if feature not in student_data
     ]
 
     if missing_features:
-        raise ValueError(
-            f"Missing required features: {missing_features}"
-        )
+        raise ValueError(f"Missing required features: {missing_features}")
 
     # Keep only the expected features and preserve their order
     student = pd.DataFrame(
-        [{feature: student_data[feature]
-          for feature in FEATURE_COLUMNS}]
+        [{feature: student_data[feature] for feature in FEATURE_COLUMNS}]
     )
 
     if model is None:
@@ -65,7 +56,6 @@ def predict_student(student_data, model=None):
         "predicted_status": str(prediction),
         "probabilities": {
             str(label): float(probability)
-            for label, probability
-            in zip(model.classes_, probabilities)
+            for label, probability in zip(model.classes_, probabilities)
         },
     }

@@ -1,5 +1,6 @@
-﻿import joblib
 from pathlib import Path
+
+import joblib
 
 model_path = Path("models/pass_status_model.pkl")
 

@@ -21,10 +21,11 @@ services:
       context: .
       dockerfile: services/prediction-service/Dockerfile
     environment:
-      MODEL_PATH: /app/models/model_v1.joblib
+      MODEL_PATH: /app/models/pass_status_model.pkl
       USE_MOCK_MODEL: "true"
     healthcheck:
       test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8001/health')"]
       interval: 10s
       timeout: 3s
       retries: 5
+      start_period: 30s

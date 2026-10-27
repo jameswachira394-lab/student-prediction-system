@@ -8,9 +8,7 @@ print("Current columns:")
 print(df.columns.tolist())
 
 # Rename columns (replace these example names with your actual names)
-df = df.rename(columns={
-    "Pass_Fail": "Pass_status"
-})
+df = df.rename(columns={"Pass_Fail": "Pass_status"})
 
 # Display the updated column names
 print("\nUpdated columns:")

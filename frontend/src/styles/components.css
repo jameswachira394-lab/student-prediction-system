@@ -1,58 +1,157 @@
 /**
  * Component Styles (frontendesign.md Section 7, 8, 9)
- *
- * NOTE FOR FRONTEND DEVELOPER:
- * Build your component CSS below. Key guidelines from the design doc:
- *
- * 1. HEADER (Section 7.1)
- *    - White background, 1px bottom border (--border)
- *    - Logo: 36px rounded square in --primary with white rising line
- *    - Nav: pills (10px 18px padding). Active link has --primary-soft bg, --primary-dark text, weight 600
- *    - Mobile: 44px square menu button
- *
- * 2. CARDS & LAYOUT (Section 5 & 6)
- *    - Card surface: white, 1px --border, 16px radius, 32px padding (20px on phones)
- *    - Card gap: 32px (16px on phones)
- *    - Desktop (>= 1080px): Row 1 has two columns (Form ~560px, Result ~440px). Row 2 has two equal columns.
- *    - Mobile (< 1080px): 1 column stack (Form -> Result -> Influence -> Tips).
- *
- * 3. SLIDERFIELD (Section 7.2)
- *    - Label row: <label> left, number input (72px wide, 44px tall, weight 600) + unit text right
- *    - Slider: full width, 44px tall touch target, accent-color: var(--primary)
- *    - Range ticks: desktop only, 13px, --muted
- *    - Hint text: 14px, --muted
- *    - Error state: 2px --support-text border, --error-field-bg background, error message below with alert icon
- *
- * 4. PRIMARY BUTTON (Section 7.3)
- *    - Min height: 52px, 12px radius, --primary background, white text (17px, weight 600)
- *    - Right arrow icon
- *    - Hover/pressed: --primary-dark
- *    - Disabled: --disabled-bg
- *
- * 5. RESULT CARD & CHIPS (Section 7.5, 7.6, 7.7)
- *    - Big score number: 80px font-size, Manrope 800
- *    - GradeChip: 68px square, --primary-soft background, "Grade" caption above letter
- *    - RiskBadge pill: 8px 16px 8px 12px padding, 15px weight 600, 18px icon
- *      * low: --ontrack-*
- *      * medium: --attention-*
- *      * high: --support-*
- *    - ScoreGauge: 14px tall pill bar split into 3 zones (--zone-support, --zone-attention, --zone-ontrack).
- *      Marker: 24px circle, white fill, 4px --ink ring.
- *      Legend below with colored square, zone name, and range.
- *
- * 6. INFLUENCE CARD (Section 7.8)
- *    - Row layout: label (112px wide), 14px track in --track with --primary fill width %, percent right.
- *
- * 7. TIPS CARD (Section 7.9)
- *    - 3 tips: 40px circle in --primary-soft with --primary-dark icon, bold title 16px, body 15px --ink-soft.
- *
- * 8. SCREEN STATES (Section 9)
- *    - Empty: 64px icon circle, "Your estimate will appear here"
- *    - Loading: Spinner, placeholder skeleton blocks with --track
- *    - Server error: 64px circle in --support-bg with warning icon, "We could not get your estimate", "Try again" button
  */
 
-/* Layout Grid */
+/* --------------------------------------------------
+ * 1. SITE HEADER (Section 7.1)
+ * -------------------------------------------------- */
+.site-header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+}
+
+.header-inner {
+  max-width: 1184px;
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.brand-logo {
+  width: 36px;
+  height: 36px;
+  background-color: var(--primary);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  flex-shrink: 0;
+}
+
+.brand-title {
+  font-family: 'Manrope', system-ui, sans-serif;
+  font-weight: 800;
+  font-size: 19px;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 18px;
+  border-radius: var(--radius-pill);
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ink-soft);
+  text-decoration: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.nav-link:hover {
+  background-color: var(--ground);
+  color: var(--ink);
+}
+
+.nav-link.active,
+.nav-link[aria-current="page"] {
+  background-color: var(--primary-soft);
+  color: var(--primary-dark);
+  font-weight: 600;
+}
+
+.menu-btn {
+  display: none;
+  width: 44px;
+  height: 44px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--ink);
+  padding: 0;
+}
+
+.menu-btn:hover {
+  background-color: var(--ground);
+}
+
+/* Header responsive */
+@media (max-width: 1079px) {
+  .menu-btn {
+    display: inline-flex;
+  }
+
+  .nav {
+    display: none;
+    position: absolute;
+    top: 68px;
+    left: 0;
+    right: 0;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    flex-direction: column;
+    align-items: stretch;
+    padding: 16px 24px 20px;
+    gap: 8px;
+    box-shadow: 0 8px 24px rgba(16, 36, 62, 0.08);
+  }
+
+  .nav.nav-open {
+    display: flex;
+  }
+
+  .nav-link {
+    width: 100%;
+    padding: 12px 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-inner {
+    padding: 0 16px;
+    height: 60px;
+  }
+}
+
+/* --------------------------------------------------
+ * 2. INTRO SECTION
+ * -------------------------------------------------- */
+.intro-section {
+  margin-top: 16px;
+  margin-bottom: 8px;
+}
+
+/* --------------------------------------------------
+ * 3. LAYOUT & CARDS (Section 5, 6 & 8)
+ * -------------------------------------------------- */
 .card-row {
   display: grid;
   gap: 32px;
@@ -63,6 +162,7 @@
   .row-primary {
     grid-template-columns: 1fr 440px;
   }
+
   .row-secondary {
     grid-template-columns: 1fr 1fr;
   }
@@ -71,23 +171,915 @@
 @media (max-width: 1079px) {
   .card-row {
     grid-template-columns: 1fr;
-    gap: 16px;
-    margin-top: 16px;
+    gap: 20px;
+    margin-top: 20px;
   }
 }
 
-/* Card Container */
 .card {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-card);
   padding: 32px;
+  box-shadow: 0 2px 8px rgba(16, 36, 62, 0.02);
+  display: flex;
+  flex-direction: column;
 }
 
 @media (max-width: 480px) {
   .card {
     padding: 20px;
+    border-radius: 14px;
   }
 }
 
-/* Developer: Add your component styling below */
+/* --------------------------------------------------
+ * 4. FORM & SLIDERFIELD (Section 7.2)
+ * -------------------------------------------------- */
+.form-hint {
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--muted);
+  margin-top: 4px;
+  margin-bottom: 28px;
+}
+
+.fields-container {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  margin-bottom: 32px;
+}
+
+.slider-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.field-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.field-label {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.field-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.number-input {
+  width: 76px;
+  height: 44px;
+  text-align: right;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1.5px solid var(--border-strong);
+  border-radius: var(--radius-input);
+  padding: 0 10px;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+  -moz-appearance: textfield;
+}
+
+.number-input::-webkit-outer-spin-button,
+.number-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.field-unit {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ink-soft);
+  min-width: 38px;
+}
+
+/* Range slider styling */
+.field-slider {
+  width: 100%;
+  height: 44px;
+  margin: 0;
+  accent-color: var(--primary);
+  cursor: pointer;
+  background: transparent;
+  -webkit-appearance: none;
+}
+
+.field-slider::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 10px;
+  border-radius: var(--radius-pill);
+  background: var(--track);
+}
+
+.field-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 24px;
+  width: 24px;
+  border-radius: 50%;
+  background: var(--primary);
+  cursor: pointer;
+  margin-top: -7px;
+  border: 3px solid #ffffff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: transform 0.1s ease, background-color 0.15s ease;
+}
+
+.field-slider::-webkit-slider-thumb:hover {
+  background: var(--primary-dark);
+  transform: scale(1.08);
+}
+
+.field-slider::-moz-range-track {
+  width: 100%;
+  height: 10px;
+  border-radius: var(--radius-pill);
+  background: var(--track);
+}
+
+.field-slider::-moz-range-thumb {
+  height: 24px;
+  width: 24px;
+  border-radius: 50%;
+  background: var(--primary);
+  cursor: pointer;
+  border: 3px solid #ffffff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: transform 0.1s ease, background-color 0.15s ease;
+}
+
+.field-slider::-moz-range-thumb:hover {
+  background: var(--primary-dark);
+  transform: scale(1.08);
+}
+
+/* Range ticks */
+.field-ticks {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: -6px;
+  padding: 0 2px;
+}
+
+@media (max-width: 480px) {
+  .field-ticks {
+    display: none;
+  }
+}
+
+.field-hint {
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--muted);
+}
+
+/* Field error state (Section 9) */
+.slider-field.has-error .number-input {
+  border: 2px solid var(--support-text);
+  background-color: var(--error-field-bg);
+}
+
+.field-error-msg {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--support-text);
+  margin-top: 2px;
+}
+
+.field-error-msg svg {
+  flex-shrink: 0;
+}
+
+/* --------------------------------------------------
+ * 5. BUTTONS (Section 7.3 & 7.4)
+ * -------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+  transition: all 0.15s ease;
+  user-select: none;
+}
+
+.btn-primary {
+  min-height: 52px;
+  width: 100%;
+  background: var(--primary);
+  color: #ffffff;
+  font-size: 17px;
+  border-radius: var(--radius-button);
+  padding: 0 24px;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--primary-dark);
+}
+
+.btn-primary:disabled {
+  background: var(--disabled-bg);
+  cursor: not-allowed;
+  color: #ffffff;
+}
+
+.btn-secondary {
+  min-height: 48px;
+  background: var(--surface);
+  border: 1.5px solid var(--primary);
+  color: var(--primary-dark);
+  border-radius: var(--radius-button);
+  padding: 0 20px;
+  font-size: 15px;
+}
+
+.btn-secondary:hover {
+  background: var(--primary-soft);
+}
+
+.sub-button-hint {
+  font-size: 13px;
+  color: var(--muted);
+  text-align: center;
+  margin-top: 12px;
+}
+
+@media (max-width: 480px) {
+  .sub-button-hint {
+    display: none;
+  }
+}
+
+/* --------------------------------------------------
+ * 6. RESULT CARD & SCREEN STATES (Section 7.5 - 7.7, 9)
+ * -------------------------------------------------- */
+.result-card {
+  min-height: 480px;
+  position: relative;
+}
+
+#result-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  flex: 1;
+}
+
+/* --- EMPTY STATE --- */
+.state-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 48px 16px;
+  margin: auto 0;
+}
+
+.empty-icon-circle {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-pill);
+  background-color: var(--primary-soft);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.empty-title {
+  font-family: 'Manrope', system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 21px;
+  line-height: 28px;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+
+.empty-desc {
+  font-size: 15px;
+  line-height: 23px;
+  color: var(--ink-soft);
+  max-width: 300px;
+}
+
+/* --- LOADING STATE --- */
+.state-loading {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 12px 0;
+  margin: auto 0;
+}
+
+.loading-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.spinner {
+  width: 22px;
+  height: 22px;
+  border: 3px solid var(--track);
+  border-top: 3px solid var(--primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  flex-shrink: 0;
+}
+
+.btn-spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-top: 2px solid #ffffff;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+.loading-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.skeleton {
+  background: var(--track);
+  border-radius: 8px;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.skeleton-score-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.skeleton-score {
+  width: 150px;
+  height: 72px;
+}
+
+.skeleton-chip {
+  width: 68px;
+  height: 68px;
+  border-radius: 12px;
+}
+
+.skeleton-badge {
+  width: 130px;
+  height: 38px;
+  border-radius: var(--radius-pill);
+}
+
+.skeleton-gauge {
+  width: 100%;
+  height: 14px;
+  border-radius: var(--radius-pill);
+}
+
+.skeleton-text {
+  width: 90%;
+  height: 22px;
+}
+
+.skeleton-text-sub {
+  width: 60%;
+  height: 18px;
+}
+
+/* --- SUCCESS STATE --- */
+.state-success {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  animation: fadeIn 0.3s ease;
+}
+
+.result-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.sample-tag {
+  font-size: 12px;
+  font-weight: 600;
+  background: var(--tag-bg);
+  color: var(--ink-soft);
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.result-score-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.score-display {
+  display: flex;
+  align-items: baseline;
+}
+
+.score-number {
+  font-family: 'Manrope', system-ui, sans-serif;
+  font-weight: 800;
+  font-size: 80px;
+  line-height: 80px;
+  color: var(--ink);
+  letter-spacing: -0.03em;
+}
+
+@media (max-width: 480px) {
+  .score-number {
+    font-size: 64px;
+    line-height: 64px;
+  }
+}
+
+.score-unit {
+  font-family: 'Manrope', system-ui, sans-serif;
+  font-weight: 800;
+  font-size: 32px;
+  line-height: 32px;
+  color: var(--muted);
+  margin-left: 4px;
+}
+
+.grade-chip {
+  width: 68px;
+  height: 68px;
+  background: var(--primary-soft);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.grade-caption {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--primary-dark);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: -2px;
+}
+
+.grade-letter {
+  font-family: 'Manrope', system-ui, sans-serif;
+  font-weight: 800;
+  font-size: 32px;
+  line-height: 36px;
+  color: var(--primary-dark);
+}
+
+.risk-badge-wrap {
+  margin-bottom: 24px;
+}
+
+.risk-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px 8px 12px;
+  border-radius: var(--radius-pill);
+  font-size: 15px;
+  font-weight: 600;
+  border: 1px solid transparent;
+}
+
+.risk-badge svg {
+  flex-shrink: 0;
+}
+
+.risk-badge.low {
+  background: var(--ontrack-bg);
+  color: var(--ontrack-text);
+  border-color: var(--ontrack-line);
+}
+
+.risk-badge.medium {
+  background: var(--attention-bg);
+  color: var(--attention-text);
+  border-color: var(--attention-line);
+}
+
+.risk-badge.high {
+  background: var(--support-bg);
+  color: var(--support-text);
+  border-color: var(--support-line);
+}
+
+/* ScoreGauge (Section 7.7) */
+.gauge-container {
+  margin-bottom: 24px;
+}
+
+.gauge-bar-wrap {
+  position: relative;
+  padding: 10px 0;
+}
+
+.gauge-bar {
+  height: 14px;
+  width: 100%;
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+  display: flex;
+}
+
+.gauge-zone {
+  height: 100%;
+}
+
+.gauge-zone.support {
+  background: var(--zone-support);
+}
+
+.gauge-zone.attention {
+  background: var(--zone-attention);
+}
+
+.gauge-zone.ontrack {
+  background: var(--zone-ontrack);
+}
+
+.gauge-marker {
+  position: absolute;
+  top: 5px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 4px solid var(--ink);
+  transform: translateX(-50%);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  transition: left 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  pointer-events: none;
+}
+
+.gauge-legend {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+@media (max-width: 480px) {
+  .gauge-legend {
+    flex-direction: column;
+    gap: 6px;
+  }
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+
+.legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.legend-dot.support {
+  background: var(--zone-support);
+}
+
+.legend-dot.attention {
+  background: var(--zone-attention);
+}
+
+.legend-dot.ontrack {
+  background: var(--zone-ontrack);
+}
+
+.result-explanation {
+  font-size: 17px;
+  line-height: 25px;
+  color: var(--ink-soft);
+  margin-bottom: 28px;
+}
+
+.result-footnote {
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  color: var(--muted);
+  gap: 12px;
+}
+
+/* --- SERVER ERROR STATE --- */
+.state-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px 16px;
+  margin: auto 0;
+  animation: fadeIn 0.3s ease;
+}
+
+.error-icon-circle {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-pill);
+  background: var(--support-bg);
+  color: var(--support-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.error-title {
+  font-family: 'Manrope', system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 21px;
+  line-height: 28px;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+
+.error-desc {
+  font-size: 15px;
+  line-height: 23px;
+  color: var(--ink-soft);
+  max-width: 320px;
+  margin-bottom: 24px;
+}
+
+.state-error .btn-primary {
+  width: auto;
+  min-width: 160px;
+}
+
+/* --------------------------------------------------
+ * 7. INFLUENCE CARD (Section 7.8)
+ * -------------------------------------------------- */
+.influence-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.influence-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.influence-label {
+  width: 112px;
+  flex-shrink: 0;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.influence-track {
+  flex-grow: 1;
+  height: 14px;
+  background: var(--track);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+
+.influence-fill {
+  height: 100%;
+  background: var(--primary);
+  border-radius: var(--radius-pill);
+  transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.influence-val {
+  width: 44px;
+  text-align: right;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  flex-shrink: 0;
+}
+
+/* --------------------------------------------------
+ * 8. TIPS CARD (Section 7.9)
+ * -------------------------------------------------- */
+.tips-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+}
+
+.tip-item {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.tip-icon-wrap {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--primary-soft);
+  color: var(--primary-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.tip-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.tip-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.tip-body {
+  font-size: 15px;
+  line-height: 22px;
+  color: var(--ink-soft);
+}
+
+/* --------------------------------------------------
+ * 9. FOOTER (Section 7.10)
+ * -------------------------------------------------- */
+.site-footer {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  margin-top: 56px;
+  padding: 32px 24px;
+}
+
+.footer-inner {
+  max-width: 1184px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.disclaimer {
+  max-width: 680px;
+  line-height: 22px;
+}
+
+.team-credit {
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .footer-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+}
+
+/* --------------------------------------------------
+ * 10. MODAL / DIALOG (For How It Works & About)
+ * -------------------------------------------------- */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(16, 36, 62, 0.4);
+  backdrop-filter: blur(2px);
+  z-index: 200;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.modal-overlay.open {
+  display: flex;
+  animation: fadeIn 0.2s ease;
+}
+
+.modal-dialog {
+  background: var(--surface);
+  border-radius: var(--radius-card);
+  max-width: 560px;
+  width: 100%;
+  padding: 32px;
+  box-shadow: 0 12px 32px rgba(16, 36, 62, 0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-close-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--muted);
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-close-btn:hover {
+  background: var(--ground);
+  color: var(--ink);
+}
+
+.modal-body {
+  font-size: 15px;
+  line-height: 24px;
+  color: var(--ink-soft);
+}
+
+/* --------------------------------------------------
+ * 11. KEYFRAME ANIMATIONS
+ * -------------------------------------------------- */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.55;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
