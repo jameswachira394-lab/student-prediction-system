@@ -28,7 +28,7 @@ jobs:
     name: Lint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - uses: actions/setup-python@v5
         with:
@@ -59,7 +59,7 @@ jobs:
     env:
       MODEL_PATH: ${{ github.workspace }}/ml/models/model_v1.joblib
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - uses: actions/setup-python@v5
         with:
@@ -95,7 +95,7 @@ jobs:
       run:
         working-directory: frontend
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Detect Node project
         id: node
@@ -155,7 +155,7 @@ jobs:
             context: services/results-service
             dockerfile: services/results-service/Dockerfile
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Lint Dockerfile
         uses: hadolint/hadolint-action@v3.1.0
@@ -183,7 +183,7 @@ jobs:
     needs: [lint, test, frontend, docker]
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Prepare settings
         run: |
@@ -264,7 +264,7 @@ jobs:
             context: services/results-service
             dockerfile: services/results-service/Dockerfile
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Work out the image name (registry names must be lowercase)
         id: img
