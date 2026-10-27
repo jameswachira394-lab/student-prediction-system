@@ -2,7 +2,7 @@
 
 Welcome to the frontend of the **Student Results Prediction System**.
 
-This folder contains the scaffolding for the client web app. The complete design specification is detailed in [`frontendesign.md`](../frontendesign.md) at the repository root.
+This folder contains the scaffolding for the client web app. The complete design specification is detailed in [`frontendesign.md`](../docs/frontendesign.md).
 
 ---
 
@@ -71,4 +71,4 @@ frontend/
   - Request: `{"study_hours": 12, "attendance": 85, "previous_score": 64}`
   - Response: `{"predicted_score": 72.4, "grade": "B", "risk": "low", "model_version": "v1"}`
 
-For full design specifications, see [`frontendesign.md`](../frontendesign.md).
+For full design specifications, see [`frontendesign.md`](../docs/frontendesign.md).

@@ -209,6 +209,7 @@ student-results-prediction/
 ├── gateway/
 │   ├── nginx.conf               # or traefik config
 │   └── Dockerfile
+├── docs/                        # detailed backend and frontend design specs
 ├── .github/
 │   ├── workflows/               # ci.yml, deploy.yml
 │   ├── CODEOWNERS

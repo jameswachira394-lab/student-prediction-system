@@ -1,4 +1,8 @@
+from pathlib import Path
+import sys
 import unittest
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from predictor import predict_student
 

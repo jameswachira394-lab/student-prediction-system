@@ -1,83 +1,4 @@
-## AI/ML Module
-
-### Model
-- **Algorithm:** Logistic Regression
-- **Saved model:** `models/pass_status_model.pkl`
-- **Prediction module:** `predictor.py`
-- **Target variable:** `Pass_status`
-
-### Input Features
-The model uses the following seven features:
-- Gender
-- Study_Hours_per_Week
-- Attendance_Rate
-- Past_Exam_Scores
-- Parental_Education_Level
-- Internet_Access_at_Home
-- Extracurricular_Activities
-
-### Model Evaluation
-On the current held-out test set:
-- Accuracy: 75%
-- Pass precision: approximately 55%
-- Pass recall: approximately 72%
-- Pass F1-score: approximately 63%
-
-These metrics describe the current evaluation split and may vary with different data.
-
-### Running the Prediction Module
-
-Install the required dependencies:
-
-```bash
-python -m pip install -r requirements.txt
-```
-
-Run the prediction test:
-
-```bash
-python -m unittest test_predictor.py -v
-```
-
-### Limitations
-Predictions and probabilities are estimates, not guarantees. The model should not be used as the sole basis for academic decisions.
-
-# student-prediction-system
-from pathlib import Path
-import pandas as pd
-
-# Path to your original dataset
-file_path = Path("data/raw/student_performance_dataset.csv")
-
-# Load the dataset
-df = pd.read_csv(file_path)
-
-# Display dataset size
-print("\n--- DATASET SIZE ---")
-print("Rows:", df.shape[0])
-print("Columns:", df.shape[1])
-
-# Display column names
-print("\n--- COLUMN NAMES ---")
-print(df.columns.tolist())
-
-# Display first five rows
-print("\n--- FIRST FIVE ROWS ---")
-print(df.head())
-
-# Display data types
-print("\n--- DATA TYPES ---")
-df.info()
-
-# Display missing values
-print("\n--- MISSING VALUES ---")
-print(df.isnull().sum())
-
-# Display duplicate rows
-print("\n--- DUPLICATE ROWS ---")
-print(df.duplicated().sum())
 # Student Results Prediction System
-
 
 A web app that predicts a student's exam result from inputs such as study hours, attendance and previous scores, and presents it as supportive guidance, not a verdict.
 
@@ -101,7 +22,7 @@ Browser -> Gateway -> Frontend
 | `results-service` | Public API. Validates input, calls the prediction service, returns the result |
 | `prediction-service` | Loads the trained model and returns predictions. Not exposed publicly |
 
-Full design, API contracts and team processes are in [DOCUMENTATION.md](DOCUMENTATION.md).
+Full design, API contracts and team processes are in [DOCUMENTATION.md](DOCUMENTATION.md). Detailed architectural specifications can also be found in [docs/backend.md](docs/backend.md) and [docs/frontendesign.md](docs/frontendesign.md). Machine learning pipeline details are in [ml/README.md](ml/README.md).
 
 ## Quick start
 
@@ -145,12 +66,13 @@ Check that the service is up with `curl http://localhost:8080/api/health`.
 
 ```text
 .
-├── ml/                  # dataset notes, notebooks, training script, saved models
+├── ml/                  # dataset, training scripts, saved models, ML unit tests
 ├── services/
 │   ├── prediction-service/
 │   └── results-service/
 ├── frontend/            # web interface
 ├── gateway/             # reverse proxy configuration
+├── docs/                # backend and frontend design specifications
 ├── .github/             # CI workflow, Dependabot, CODEOWNERS, PR template
 ├── docker-compose.yml
 ├── .env.example
