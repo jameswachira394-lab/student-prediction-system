@@ -107,7 +107,7 @@ jobs:
             echo "::notice::No package.json in frontend/, skipping the Node build."
           fi
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         if: steps.node.outputs.found == 'true'
         with:
           node-version: lts/*
