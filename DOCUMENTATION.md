@@ -24,6 +24,8 @@ This document is the single reference for how the team builds, runs, tests and s
 
 The system predicts a student's exam result from inputs such as study hours, attendance and previous scores, and presents it as supportive guidance, not a verdict.
 
+For a concise summary of what was built across DevOps & Backend, Frontend, and AI/ML, see [OVERVIEW.md](OVERVIEW.md).
+
 It is built as a small set of microservices behind a single gateway. Each team member owns one layer, and each service can be built, tested, released and rolled back on its own.
 
 **Goals for version 1**

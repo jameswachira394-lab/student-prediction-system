@@ -22,7 +22,7 @@ Browser -> Gateway -> Frontend
 | `results-service` | Public API. Validates input, calls the prediction service, returns the result |
 | `prediction-service` | Loads the trained model and returns predictions. Not exposed publicly |
 
-Full design, API contracts and team processes are in [DOCUMENTATION.md](DOCUMENTATION.md). Detailed architectural specifications can also be found in [docs/backend.md](docs/backend.md) and [docs/frontendesign.md](docs/frontendesign.md). Machine learning pipeline details are in [ml/README.md](ml/README.md).
+Full design, API contracts and team processes are in [DOCUMENTATION.md](DOCUMENTATION.md). A structured breakdown of what was built across DevOps/Backend, Frontend, and ML is in [OVERVIEW.md](OVERVIEW.md). Detailed architectural specifications can also be found in [docs/backend.md](docs/backend.md) and [docs/frontendesign.md](docs/frontendesign.md). Machine learning pipeline details are in [ml/README.md](ml/README.md).
 
 ## Quick start
 
